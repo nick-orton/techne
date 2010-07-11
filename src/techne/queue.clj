@@ -7,6 +7,10 @@
 
 (defn front
   [queue]
-  (last queue))
+  (first queue))
+
+(defn push
+  [item queue]
+  (concat queue '(item)))
 
 

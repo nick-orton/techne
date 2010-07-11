@@ -9,4 +9,5 @@
   (is (= '(:a :b :c) (queue/new :a :b :c))))
 
 (deftest test-front
-  (is (= :c (queue/front (queue/new :a :b :c)))))
+  (is (= :a (queue/front (queue/new :a :b :c)))))
+
