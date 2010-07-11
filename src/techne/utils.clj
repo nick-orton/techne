@@ -2,13 +2,15 @@
   "some generic helper functions"
   (:require [clojure.contrib.str-utils2 :as str]))
 
-(defn !=
-  [a b]
-  (not (= a b)))
 
-(defn !nil?
-  [o]
-  (not (nil? o)))
+(defmacro def-bang-form
+  [fun]
+  `(defn  ~(symbol (str "!" fun)) 
+     [& as#] 
+     (not (apply ~fun as#))))
+
+(def-bang-form =)
+(def-bang-form nil?)
 
 (defn insert-2nd 
   [x xs]

@@ -2,16 +2,16 @@
   (:use [techne.utils] :reload-all)
   (:use [clojure.test]))
 
-(defn isnt [thing]
-  (is (not thing)))
+(defmacro isnt [thing]
+  `(is (not ~thing)))
 
 (deftest test-not-equals
   (is (!= 1 2))
   (isnt (!= 1 1 )))
 
 (deftest not-nil
-  (is (!nil? 1))
-  (isnt (!nil? nil)))
+  (is (!nil? :a))
+  (is (= false(!nil? nil))))
 
 (deftest insert-in-2nd-place
   (is (= [nil 1] (insert-2nd 1 [])))
