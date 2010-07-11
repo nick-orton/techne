@@ -1,8 +1,7 @@
 (ns techne.stacks-test
-
-(:require [techne.stacks :as stack])
-(:use [clojure.test]
-      [techne.utils]))
+  (:require [techne.stacks :as stack])
+  (:use [clojure.test]
+        [techne.utils]))
 
 (deftest new-with-no-args-is-empty
   (is (empty? (stack/new)))
