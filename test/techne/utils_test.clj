@@ -1,9 +1,7 @@
 (ns techne.utils-test
   (:use [techne.utils] :reload-all)
-  (:use [clojure.test]))
-
-(defmacro isnt [thing]
-  `(is (not ~thing)))
+  (:use [clojure.test]
+        [techne.test-utils]))
 
 (deftest test-not-equals
   (is (!= 1 2))
@@ -11,7 +9,7 @@
 
 (deftest not-nil
   (is (!nil? :a))
-  (is (= false(!nil? nil))))
+  (isnt (!nil? nil)))
 
 (deftest insert-in-2nd-place
   (is (= [nil 1] (insert-2nd 1 [])))
