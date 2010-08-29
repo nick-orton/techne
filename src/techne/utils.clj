@@ -9,6 +9,8 @@
      [& as#] 
      (not (apply ~fun as#))))
 
+(defmacro =# [tst] `(fn [x] (= ~tst x)))
+
 (def-bang-form =)
 (def-bang-form nil?)
 
@@ -19,5 +21,13 @@
 (defn +strs
   [strings]
   (str/join "" strings))
+
+(defn swap-if
+  [pred token element]
+  (if (pred element) token element))
+
+(defn swap-if-eq 
+  [target token element]
+  (swap-if (=# target) token element))
 
 
