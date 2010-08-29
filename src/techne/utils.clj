@@ -9,7 +9,7 @@
      [& as#] 
      (not (apply ~fun as#))))
 
-(defmacro =# [tst] `(fn [x] (= ~tst x)))
+(defn =# [tst] (fn [x] (= tst x)))
 
 (def-bang-form =)
 (def-bang-form nil?)
