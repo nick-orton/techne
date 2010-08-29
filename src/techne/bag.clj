@@ -1,4 +1,5 @@
-(ns techne.bag)
+(ns techne.bag
+  (:use [techne.map-utils]))
 
 
 ;(defn new 
@@ -6,9 +7,13 @@
 ;  ([& args] args))
 
 
+(defn get-occurances
+  [bag item]
+  (get bag item 0))
+
 (defn put-occurances
   [bag item occurances]
-  (let [prev (get bag item 0)]
+  (let [prev (get-occurances bag item)]
     (assoc bag item (+ prev occurances))))
 
 (defn put 
@@ -18,11 +23,9 @@
 
 (defn remove-occurances
   [bag item occurances]
-  (let [prev (get bag item 0)
+  (let [prev (get-occurances bag item)
         new-occurances (- prev occurances)]
-    (if (pos? new-occurances)
-        (assoc bag item new-occurances)
-        (dissoc bag item))))
+    (keep-if item pos? new-occurances bag)))
 
 (defn remove 
   [bag item]
