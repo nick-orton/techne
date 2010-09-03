@@ -1,4 +1,4 @@
-(defproject techne "0.4.0"
+(defproject techne "0.5.0-SNAPSHOT"
   :description "a collection of utilities and macros"
   :dev-dependencies [[lein-clojars "0.5.0"]
                      [polybius "1.0.0"]]
