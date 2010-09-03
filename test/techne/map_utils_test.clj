@@ -1,13 +1,14 @@
 (ns techne.map-utils-test
   (:use [techne.map-utils] :reload-all)
   (:use [clojure.test]
+        [techne.utils]
         [techne.test-utils]))
 
 (defn always-true
   [x] (= x x))
 
 (defn always-false
-  [x] (not (= x x)))
+  [x] (!= x x))
 
 
 
