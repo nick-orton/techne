@@ -9,15 +9,11 @@
 ;
 
 (defn assert-bag-contents [contents bag]
-  (is (= (inspect bag) contents)))
+  (is (= (:state bag) contents)))
 
 (deftest test-put-occurences
   (assert-bag-contents {:a 2} (put-n empty-bag :a 2))
   (assert-bag-contents {:a 5} (put-n three-as :a 2)))
-
-;(deftest test-get-n
-;  (is= 3 (get-n three-as))) 
-  
 
 (deftest test-put
   (assert-bag-contents {:a 1} (put empty-bag :a))

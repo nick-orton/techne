@@ -4,7 +4,6 @@
 (defprotocol Bag
   (put-n [self item n])
   (put [self item])
-  (inspect [self])
   (pluck-n [self item n])
   (pluck [self item])
   (get-n [self item])           
@@ -17,7 +16,6 @@
         (MapBag. (assoc state item new-n))))
     (put [self item]
       (put-n self item 1))
-    (inspect [self] state)
     (get-n [self item] 
       (get state item 0))
     (pluck-n [self item n]
@@ -29,7 +27,7 @@
 
   Object
     (toString [self]
-      (str ("Bag: " (inspect self))))
+      (str ("Bag: " (:state self))))
  )
 
 (defn new-bag 
