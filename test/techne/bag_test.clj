@@ -1,16 +1,25 @@
 (ns techne.bag-test
   (:use [techne.bag] :reload-all)
   (:use [clojure.test]
-        [techne.test-utils]))
+        [techne.test-utils])
+  )
+
+(def empty-bag (new-bag))
+;(def three-as (techne.bag/Bag. {:a 3}))
+;
+
+(defn assert-bag-contents [bag contents]
+  (is (= contents (inspect bag))))
 
 (deftest test-put-occurences
-  (is (= {:a 2} (put-occurances {} :a 2)))
-  (is (= {:a 5} (put-occurances {:a 3} :a 2))
-      ))
+  (assert-bag-contents (put-n empty-bag :a 2) {:a 2})
+;  (is (= {:a 5} (put-n three-as :a 2)))
+      )
 
 (deftest test-put
-  (is (= {:a 1} (put {} :a)))
-  (is (= {:a 4} (put {:a 3} :a))))
+  (assert-bag-contents (put empty-bag :a) {:a 1})
+ ; (is (= {:a 4} (put three-as :a)))
+  )
 
 (deftest test-remove-occurances
   (is (= {} (remove-occurances {} :a 2)))
