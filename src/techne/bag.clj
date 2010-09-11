@@ -5,7 +5,9 @@
   (put-n [self item n])
   (put [self item])
   (inspect [self])
- (get-n [self item])           
+  (pluck-n [self item n])
+  (pluck [self item])
+  (get-n [self item])           
              )
 
 (defrecord MapBag [state]
@@ -17,8 +19,15 @@
       (put-n self item 1))
     (inspect [self] state)
     (get-n [self item] 
-     (get state item 0))
-   Object
+      (get state item 0))
+    (pluck-n [self item n]
+      (let [prev (get-n self item)
+            new-n (- prev n)]
+           (MapBag. (keep-if item pos? new-n state))))
+    (pluck [self item]
+      (pluck-n self item 1))
+
+  Object
     (toString [self]
       (str ("Bag: " (inspect self))))
  )
@@ -30,16 +39,3 @@
    (MapBag. state)))
 
 
-(defn get-occurances
-  [bag item]
-  (get bag item 0))
-
-(defn remove-occurances
-  [bag item occurances]
-  (let [prev (get-occurances bag item)
-        new-occurances (- prev occurances)]
-    (keep-if item pos? new-occurances bag)))
-
-(defn remove 
-  [bag item]
-  (remove-occurances bag item 1))

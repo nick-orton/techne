@@ -4,4 +4,9 @@
 (defmacro isnt [thing]
   `(is (not ~thing)))
 
+(defmacro is= [one two]
+  `(is (= ~one ~two)))
+
+(defmacro isnt= [one two]
+  `(isnt (= ~one ~two)))
 
