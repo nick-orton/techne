@@ -5,7 +5,7 @@
   )
 
 (def empty-bag (new-bag))
-;(def three-as (techne.bag/Bag. {:a 3}))
+(def three-as (new-bag {:a 3}))
 ;
 
 (defn assert-bag-contents [bag contents]
@@ -13,13 +13,11 @@
 
 (deftest test-put-occurences
   (assert-bag-contents (put-n empty-bag :a 2) {:a 2})
-;  (is (= {:a 5} (put-n three-as :a 2)))
-      )
+  (assert-bag-contents (put-n three-as :a 2) {:a 5} ))
 
 (deftest test-put
   (assert-bag-contents (put empty-bag :a) {:a 1})
- ; (is (= {:a 4} (put three-as :a)))
-  )
+  (assert-bag-contents (put three-as :a ) {:a 4} ))
 
 (deftest test-remove-occurances
   (is (= {} (remove-occurances {} :a 2)))

@@ -20,7 +20,11 @@
       (str ("Bag: " (inspect self))))
  )
 
-(defn new-bag [] (MapBag. {}))
+(defn new-bag 
+  ([] 
+   (MapBag. {}))
+  ([state] 
+   (MapBag. state)))
 
 
 (defn get-occurances
