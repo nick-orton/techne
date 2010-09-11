@@ -31,3 +31,8 @@
   (is (assert-bag-contents  {:a 2} (pluck three-as :a))))
 
 
+(deftest test-seq->bag
+  (is (assert-bag-contents {} (seq->bag [])))
+  (is (assert-bag-contents  {:a 2 :b 1} (seq->bag [:a :b :a]))))
+
+

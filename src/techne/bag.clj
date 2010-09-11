@@ -6,8 +6,7 @@
   (put [self item])
   (pluck-n [self item n])
   (pluck [self item])
-  (get-n [self item])           
-             )
+  (get-n [self item]))
 
 (defrecord MapBag [state]
   Bag
@@ -27,13 +26,16 @@
 
   Object
     (toString [self]
-      (str ("Bag: " (:state self))))
- )
+      (str ("Bag: " (:state self)))))
 
 (defn new-bag 
   ([] 
    (MapBag. {}))
   ([state] 
    (MapBag. state)))
+
+(defn seq->bag
+  [sq]
+  (reduce #(put %1 %2) (new-bag) sq))
 
 
