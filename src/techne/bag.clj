@@ -4,17 +4,20 @@
 (defprotocol Bag
   (put-n [self item n])
   (put [self item])
-  (inspect [self]))
+  (inspect [self])
+ (get-n [self item])           
+             )
 
 (defrecord MapBag [state]
   Bag
-    (put-n 
-      [self item n] 
-      (MapBag. (assoc state item n)))
-    (put 
-      [self item]
+    (put-n [self item n] 
+      (let [new-n (+ n (get-n self item))]
+        (MapBag. (assoc state item new-n))))
+    (put [self item]
       (put-n self item 1))
     (inspect [self] state)
+    (get-n [self item] 
+     (get state item 0))
    Object
     (toString [self]
       (str ("Bag: " (inspect self))))

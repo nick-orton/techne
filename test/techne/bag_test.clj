@@ -15,9 +15,9 @@
   (assert-bag-contents (put-n empty-bag :a 2) {:a 2})
   (assert-bag-contents (put-n three-as :a 2) {:a 5} ))
 
-(deftest test-put
-  (assert-bag-contents (put empty-bag :a) {:a 1})
-  (assert-bag-contents (put three-as :a ) {:a 4} ))
+;(deftest test-put
+;  (assert-bag-contents (put empty-bag :a) {:a 1})
+;  (assert-bag-contents (put three-as :a ) {:a 4} ))
 
 (deftest test-remove-occurances
   (is (= {} (remove-occurances {} :a 2)))
