@@ -1,16 +1,16 @@
 (ns techne.bag
   (:use [techne.map-utils]))
 
-(defprotocol BagProtocol
+(defprotocol Bag
   (put-n [self item n])
   (put [self item])
   (inspect [self]))
 
-(defrecord Bag [state]
-  BagProtocol
+(defrecord MapBag [state]
+  Bag
     (put-n 
       [self item n] 
-      (Bag. (assoc state item n)))
+      (MapBag. (assoc state item n)))
     (put 
       [self item]
       (put-n self item 1))
@@ -20,7 +20,7 @@
       (str ("Bag: " (inspect self))))
  )
 
-(defn new-bag [] (Bag. {}))
+(defn new-bag [] (MapBag. {}))
 
 
 (defn get-occurances
