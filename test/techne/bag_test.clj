@@ -6,10 +6,6 @@
 
 (def empty-bag (create))
 (def three-as (create {:a 3}))
-;
-
-(defn assert-bag-contents [contents bag]
-  (is (= (:state bag) contents)))
 
 (deftest test-put-occurences
   (assert-bag-contents {:a 2} (put-n empty-bag :a 2))

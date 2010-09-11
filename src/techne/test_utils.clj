@@ -10,3 +10,7 @@
 (defmacro isnt= [one two]
   `(isnt (= ~one ~two)))
 
+(defn assert-bag-contents [contents bag]
+  (is (= (:state bag) contents)))
+
+
