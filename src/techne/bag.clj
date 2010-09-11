@@ -28,7 +28,7 @@
     (toString [self]
       (str ("Bag: " (:state self)))))
 
-(defn new-bag 
+(defn create 
   ([] 
    (MapBag. {}))
   ([state] 
@@ -36,6 +36,6 @@
 
 (defn seq->bag
   [sq]
-  (reduce #(put %1 %2) (new-bag) sq))
+  (reduce #(put %1 %2) (create) sq))
 
 

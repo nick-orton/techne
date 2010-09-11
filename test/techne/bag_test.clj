@@ -4,8 +4,8 @@
         [techne.test-utils])
   )
 
-(def empty-bag (new-bag))
-(def three-as (new-bag {:a 3}))
+(def empty-bag (create))
+(def three-as (create {:a 3}))
 ;
 
 (defn assert-bag-contents [contents bag]
@@ -21,10 +21,10 @@
 
 (deftest test-remove-occurances
   (is (assert-bag-contents {} (pluck-n empty-bag :a 2)))
-  (is (assert-bag-contents {:b 2} (pluck-n (new-bag {:b 2}) :a 2)))
-  (is (assert-bag-contents {:b 2} (pluck-n (new-bag {:a 1 :b 2}) :a 2)))
-  (is (assert-bag-contents {:a 1} (pluck-n (new-bag {:a 3}) :a 2)))
-  (is (assert-bag-contents {:a 1 :b 2} (pluck-n (new-bag {:a 3 :b 2}) :a 2))))
+  (is (assert-bag-contents {:b 2} (pluck-n (create {:b 2}) :a 2)))
+  (is (assert-bag-contents {:b 2} (pluck-n (create {:a 1 :b 2}) :a 2)))
+  (is (assert-bag-contents {:a 1} (pluck-n (create {:a 3}) :a 2)))
+  (is (assert-bag-contents {:a 1 :b 2} (pluck-n (create {:a 3 :b 2}) :a 2))))
 
 (deftest test-remove
   (is (assert-bag-contents {} (pluck empty-bag :a)))
