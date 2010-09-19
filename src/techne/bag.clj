@@ -9,20 +9,20 @@
   (uniques [self])
   (inspect [self])  ;pull up into an inspectable
   ;(count [self])
-  (count [self item]))
+  (tally [self item]))
 
 (deftype MapBag [state]
   Bag
     (put-n [self item n] 
-      (let [new-n (+ n (count self item))]
+      (let [new-n (+ n (tally self item))]
         (MapBag. (assoc state item new-n))))
     (put [self item]
       (put-n self item 1))
 
-    (count [self item] 
+    (tally [self item] 
       (get state item 0))
     (pluck-n [self item n]
-      (let [prev (count self item)
+      (let [prev (tally self item)
             new-n (- prev n)]
            (MapBag. (keep-if item pos? new-n state))))
     (pluck [self item]

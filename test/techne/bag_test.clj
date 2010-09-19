@@ -27,8 +27,8 @@
   (is (assert-bag-contents  {:a 2} (bag/pluck three-as :a))))
 
 (deftest test-count
-  (is (= 3 (bag/count three-as :a)))
-  (is (= 0 (bag/count empty-bag :a))))
+  (is (= 3 (bag/tally three-as :a)))
+  (is (= 0 (bag/tally empty-bag :a))))
 
 (deftest test-seq->bag
   (is (assert-bag-contents {} (bag/seq->bag [])))
