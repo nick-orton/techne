@@ -6,7 +6,7 @@
   (put [self item])
   (pluck-n [self item n])
   (pluck [self item])
-  (keys [self])
+  (uniques [self])
   (inspect [self])  ;pull up into an inspectable
   ;(count [self])
   (count [self item]))
@@ -28,7 +28,7 @@
     (pluck [self item]
       (pluck-n self item 1))
     (inspect [self] state)
-    (keys [self] (set (clojure.core/keys state))) 
+    (uniques [self] (set (keys state))) 
            
   Object
     (toString [self]
