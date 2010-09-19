@@ -8,7 +8,7 @@
   (pluck [self item])
   (uniques [self])
   (inspect [self])  ;pull up into an inspectable
-  ;(count [self])
+  (total [self])
   (tally [self item]))
 
 (deftype MapBag [state]
@@ -29,6 +29,8 @@
       (pluck-n self item 1))
     (inspect [self] state)
     (uniques [self] (set (keys state))) 
+    (total [self]
+      (reduce #(+ %1 (tally self %2)) 0 (uniques self)))
            
   Object
     (toString [self]

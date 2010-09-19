@@ -37,3 +37,7 @@
 (deftest test-keys
   (is (= #{:a :b :c} (bag/uniques (bag/seq->bag [:a :a :b :c])))))
 
+(deftest test-totals
+  (is (= 3 (bag/total three-as)))
+  (is (= 5 (bag/total (bag/seq->bag [:a :b :b :b :a]))))
+  (is (= 0 (bag/total empty-bag))))
