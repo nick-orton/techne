@@ -1,16 +1,17 @@
 (ns techne.bag
-  (:use [techne.map-utils])
-  (:import java.util.Map))
+  (:use [techne.map-utils]))
 
 (defprotocol Bag
   (put-n [self item n])
   (put [self item])
   (pluck-n [self item n])
   (pluck [self item])
+  (keys [self])
+  (inspect [self])  ;pull up into an inspectable
   ;(count [self])
   (count [self item]))
 
-(defrecord MapBag [state]
+(deftype MapBag [state]
   Bag
     (put-n [self item n] 
       (let [new-n (+ n (count self item))]
@@ -26,13 +27,14 @@
            (MapBag. (keep-if item pos? new-n state))))
     (pluck [self item]
       (pluck-n self item 1))
+    (inspect [self] state)
+      
 
-;  java.util.Map 
-;    (getKeys [self] (keys state)) ;TODO TEST
+    ;(keys [self] (clojure.core/keys state)) ;TODO TEST
            
   Object
     (toString [self]
-      (str ("Bag: " (:state self)))))
+      (str "Bag: " (:state self))))
 
 (defn create 
   ([] 

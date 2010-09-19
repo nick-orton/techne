@@ -1,34 +1,34 @@
 (ns techne.bag-test
-  (:use [techne.bag] :reload-all)
+  (:require [techne.bag :as bag])
   (:use [clojure.test]
         [techne.test-utils])
   )
 
-(def empty-bag (create))
-(def three-as (create {:a 3}))
+(def empty-bag (bag/create))
+(def three-as (bag/create {:a 3}))
 
 (deftest test-put-occurences
-  (assert-bag-contents {:a 2} (put-n empty-bag :a 2))
-  (assert-bag-contents {:a 5} (put-n three-as :a 2)))
+  (assert-bag-contents {:a 2} (bag/put-n empty-bag :a 2))
+  (assert-bag-contents {:a 5} (bag/put-n three-as :a 2)))
 
 (deftest test-put
-  (assert-bag-contents {:a 1} (put empty-bag :a))
-  (assert-bag-contents {:a 4} (put three-as :a )))
+  (assert-bag-contents {:a 1} (bag/put empty-bag :a))
+  (assert-bag-contents {:a 4} (bag/put three-as :a )))
 
 (deftest test-remove-occurances
-  (is (assert-bag-contents {} (pluck-n empty-bag :a 2)))
-  (is (assert-bag-contents {:b 2} (pluck-n (create {:b 2}) :a 2)))
-  (is (assert-bag-contents {:b 2} (pluck-n (create {:a 1 :b 2}) :a 2)))
-  (is (assert-bag-contents {:a 1} (pluck-n (create {:a 3}) :a 2)))
-  (is (assert-bag-contents {:a 1 :b 2} (pluck-n (create {:a 3 :b 2}) :a 2))))
+  (is (assert-bag-contents {} (bag/pluck-n empty-bag :a 2)))
+  (is (assert-bag-contents {:b 2} (bag/pluck-n (bag/create {:b 2}) :a 2)))
+  (is (assert-bag-contents {:b 2} (bag/pluck-n (bag/create {:a 1 :b 2}) :a 2)))
+  (is (assert-bag-contents {:a 1} (bag/pluck-n three-as :a 2)))
+  (is (assert-bag-contents {:a 1 :b 2} (bag/pluck-n (bag/create {:a 3 :b 2}) :a 2))))
 
 (deftest test-remove
-  (is (assert-bag-contents {} (pluck empty-bag :a)))
-  (is (assert-bag-contents  {:a 2} (pluck three-as :a))))
+  (is (assert-bag-contents {} (bag/pluck empty-bag :a)))
+  (is (assert-bag-contents  {:a 2} (bag/pluck three-as :a))))
 
 
 (deftest test-seq->bag
-  (is (assert-bag-contents {} (seq->bag [])))
-  (is (assert-bag-contents  {:a 2 :b 1} (seq->bag [:a :b :a]))))
+  (is (assert-bag-contents {} (bag/seq->bag [])))
+  (is (assert-bag-contents  {:a 2 :b 1} (bag/seq->bag [:a :b :a]))))
 
 

@@ -1,5 +1,6 @@
 (ns techne.test-utils
- (:use [clojure.test]))
+ (:use [clojure.test])
+ (:require [techne.bag :as bag]))
 
 (defmacro isnt [thing]
   `(is (not ~thing)))
@@ -11,6 +12,6 @@
   `(isnt (= ~one ~two)))
 
 (defn assert-bag-contents [contents bag]
-  (is (= (:state bag) contents)))
+  (is (= (bag/inspect bag) contents)))
 
 
