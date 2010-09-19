@@ -34,4 +34,6 @@
   (is (assert-bag-contents {} (bag/seq->bag [])))
   (is (assert-bag-contents  {:a 2 :b 1} (bag/seq->bag [:a :b :a]))))
 
+(deftest test-keys
+  (is (= #{:a :b :c} (bag/keys (bag/seq->bag [:a :a :b :c])))))
 

@@ -28,9 +28,7 @@
     (pluck [self item]
       (pluck-n self item 1))
     (inspect [self] state)
-      
-
-    ;(keys [self] (clojure.core/keys state)) ;TODO TEST
+    (keys [self] (set (clojure.core/keys state))) 
            
   Object
     (toString [self]
