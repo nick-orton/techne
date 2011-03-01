@@ -34,6 +34,14 @@
   (is (assert-bag-contents {} (bag/seq->bag [])))
   (is (assert-bag-contents  {:a 2 :b 1} (bag/seq->bag [:a :b :a]))))
 
+(deftest test->seq
+  (is (= [2 2 2 1 1] (bag/->seq (bag/seq->bag [1 1 2 2 2]))))
+  )
+
+(deftest test-put-all
+  (is (assert-bag-contents {} (bag/put-all (bag/create) [])))
+  (is (assert-bag-contents  {:a 2 :b 1} (bag/put-all (bag/create) [:a :b :a]))))
+
 (deftest test-keys
   (is (= #{:a :b :c} (bag/uniques (bag/seq->bag [:a :a :b :c])))))
 

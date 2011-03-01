@@ -4,11 +4,13 @@
 (defprotocol Bag
   (put-n [self item n])
   (put [self item])
+  (put-all [self items])
   (pluck-n [self item n])
   (pluck [self item])
   (uniques [self])
   (inspect [self])  ;pull up into an inspectable
   (total [self])
+  (->seq [self])
   (tally [self item]))
 
 (deftype MapBag [state]
@@ -18,7 +20,8 @@
         (MapBag. (assoc state item new-n))))
     (put [self item]
       (put-n self item 1))
-
+    (put-all [self items]
+      (reduce #(put %1 %2) self items))
     (tally [self item] 
       (get state item 0))
     (pluck-n [self item n]
@@ -31,6 +34,9 @@
     (uniques [self] (set (keys state))) 
     (total [self]
       (reduce #(+ %1 (tally self %2)) 0 (uniques self)))
+    (->seq [self]
+           ;TODO
+      (reduce #(concat (repeat (tally self %2) %2) %1) [] (uniques self)))
            
   Object
     (toString [self]
@@ -44,6 +50,6 @@
 
 (defn seq->bag
   [sq]
-  (reduce #(put %1 %2) (create) sq))
+  (put-all (create) sq))
 
 
