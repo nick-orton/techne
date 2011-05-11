@@ -7,7 +7,7 @@
 Leiningen
 To use techne in your own projects simply add the following to your project.clj file in the :dev-dependencies section:
 
-    [marginalia "0.6.1"]
+    [techne "0.6.1"]
 
 ## Installation
 
