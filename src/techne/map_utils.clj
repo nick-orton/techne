@@ -1,13 +1,13 @@
 (ns techne.map-utils)
 
 (defn keep-if
-  ([key fun val map]
-    (if (fun val)
+  {:deprecated "0.6.1"}
+  ([key pred val map]
+    (if (pred val)
         (assoc map key val)
         (dissoc map key)))
-  ([key fun map]
-    (if (fun key)
+  ([key pred map]
+    (if (pred key)
         map
         (dissoc map key))))
-
 
