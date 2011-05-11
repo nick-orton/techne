@@ -1,4 +1,5 @@
-(ns techne.map-utils)
+(ns techne.map-utils
+  "utilities for working with Associative data strutures")
 
 (defn keep-if
   {:deprecated "0.6.1"}
