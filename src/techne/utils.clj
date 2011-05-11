@@ -9,8 +9,6 @@
      [& as#] 
      (not (apply ~fun as#))))
 
-(defn =# [tst] (fn [x] (= tst x)))
-
 (def-bang-form =)
 (def-bang-form nil?)
 
@@ -28,6 +26,6 @@
 
 (defn swap-if-eq 
   [target token element]
-  (swap-if (=# target) token element))
+  (swap-if #(= target %) token element))
 
 

@@ -20,3 +20,5 @@
 (deftest concat-strings
   (is (= "abc" (+strs ["ab" "c"]))))
 
+(deftest test-swap-if-eq
+  (is (= "x" (swap-if-eq "a" "x" "a"))))   
