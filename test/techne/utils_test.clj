@@ -15,6 +15,8 @@
   (is (= [nil 1] (insert-2nd 1 [])))
   (is (= [0 1] (insert-2nd 1 [0])))
   (is (= [0 1 2] (insert-2nd 1 [0 2])))
+  (is (= [0 1 2] (insert-2nd 1 '(0 2))))
+  (is (= [0 1 2 3 ] (insert-2nd 1 [0 2 3])))
   (is (= [0 1 2 3 ] (insert-2nd 1 [0 2 3]))))
 
 (deftest concat-strings
