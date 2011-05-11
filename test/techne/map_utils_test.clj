@@ -10,11 +10,11 @@
 (defn always-false
   [x] (!= x x))
 
-
+(deftest test-keep-key-if
+  (is (= {:a 2} (keep-key-if {:a 2} always-true :a )))
+  (is (= {} (keep-key-if {:a 2} always-false :a))))
 
 (deftest test-keep-if
-  (is (= {:a 2} (keep-if :a always-true 2 {})))
-  (is (= {} (keep-if :a always-false 2 {:a 2})))
-  (is (= {:a 2} (keep-if :a always-true {:a 2})))
-  (is (= {} (keep-if :a always-false {:a 2}))))
+  (is (= {:a 2} (remove-key-if {:a 2} always-false :a)))
+  (is (= {} (remove-key-if {:a 2} always-true :a ))))
 
