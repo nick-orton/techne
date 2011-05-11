@@ -21,6 +21,7 @@
 
 (defn +strs
   "concatinate a sequence of strings together"
+  {:deprecated "0.6.1"}
   [strings]
   (str/join "" strings))
 
