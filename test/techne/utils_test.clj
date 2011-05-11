@@ -21,4 +21,5 @@
   (is (= "abc" (+strs ["ab" "c"]))))
 
 (deftest test-swap-if-eq
+  (is (= "b" (swap-if-eq "a" "x" "b")))   
   (is (= "x" (swap-if-eq "a" "x" "a"))))   
