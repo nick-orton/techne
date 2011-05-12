@@ -15,14 +15,14 @@
   (assert-bag-contents {:a 1} (bag/put empty-bag :a))
   (assert-bag-contents {:a 4} (bag/put three-as :a )))
 
-(deftest test-remove-occurances
+(deftest test-pluck-n
   (is (assert-bag-contents {} (bag/pluck-n empty-bag :a 2)))
   (is (assert-bag-contents {:b 2} (bag/pluck-n (bag/create {:b 2}) :a 2)))
   (is (assert-bag-contents {:b 2} (bag/pluck-n (bag/create {:a 1 :b 2}) :a 2)))
   (is (assert-bag-contents {:a 1} (bag/pluck-n three-as :a 2)))
   (is (assert-bag-contents {:a 1 :b 2} (bag/pluck-n (bag/create {:a 3 :b 2}) :a 2))))
 
-(deftest test-remove
+(deftest test-pluck
   (is (assert-bag-contents {} (bag/pluck empty-bag :a)))
   (is (assert-bag-contents  {:a 2} (bag/pluck three-as :a))))
 

@@ -1,5 +1,5 @@
 (ns techne.bag
-  (:use [techne.maps]))
+  )
 
 (defprotocol Bag
   (put-n [self item n])
@@ -16,8 +16,8 @@
 (deftype MapBag [state]
   Bag
     (put-n [self item n] 
-      (let [new-n (+ n (tally self item))]
-        (MapBag. (assoc state item new-n))))
+      (let [n* (+ n (tally self item))]
+        (MapBag. (assoc state item n*))))
     (put [self item]
       (put-n self item 1))
     (put-all [self items]
@@ -26,8 +26,10 @@
       (get state item 0))
     (pluck-n [self item n]
       (let [prev (tally self item)
-            new-n (- prev n)]
-           (MapBag. (keep-if item pos? new-n state))))
+            n* (- prev n)]
+           (MapBag. (if (pos? n*)
+                        (assoc state item n*)
+                        (dissoc state item)))))
     (pluck [self item]
       (pluck-n self item 1))
     (inspect [self] state)
