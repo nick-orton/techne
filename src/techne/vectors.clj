@@ -1,4 +1,4 @@
-(ns techne.vector-tools
+(ns techne.vectors
   "tools for vectors"
 )
 

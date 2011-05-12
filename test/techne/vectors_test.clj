@@ -1,5 +1,5 @@
-(ns techne.vector-tools-test
-  (:use [techne.vector-tools] :reload-all)
+(ns techne.vectors-test
+  (:use [techne.vectors] :reload-all)
   (:use [clojure.test]
         [techne.test-utils]))
 
