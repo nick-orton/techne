@@ -2,18 +2,41 @@
   )
 
 (defprotocol Bag
-  (put-n [self item n])
-  (put [self item])
-  (put-all [self items])
-  (pluck-n [self item n])
-  (pluck [self item])
-  (uniques [self])
-  (inspect [self])  ;pull up into an inspectable
-  (total [self])
-  (->seq [self])
-  (tally [self item]))
+  "A representation of a multi-set.  Bags can have duplicates, but are unordered.  
+   Use a Bag where you would normally use a map of sequences that are used to accumulate counts"
+  (put-n 
+    "Put n items in the bag"
+    [self item n])
+  (put 
+    "Put 1 item in the bag"
+    [self item])
+  (put-all 
+    "Put all the items from a Sequence into a Bag"
+    [self items])
+  (pluck-n 
+    "Pluck n items out of the bag"
+    [self item n])
+  (pluck 
+    "Pluck 1 item out of the bag"
+    [self item])
+  (uniques 
+    "Count the number of unique items in the bag"
+    [self])
+  (inspect [self])  ;TODO pull up into an inspectable
+  (total 
+    "Count the total number of items in the bag"
+    [self])
+  (->seq 
+    "Transform the item into a sequence"
+    [self])
+  (tally 
+    "Count the number of items in the bag equal to a given item"
+    [self item]))
+;TODO tally with a predicate
 
-(deftype MapBag [state]
+(deftype MapBag 
+  "Implements the bag interface using a HashMap.  A MapBag has constant time insert, removal, and tallying."
+  [state]
   Bag
     (put-n [self item n] 
       (let [n* (+ n (tally self item))]
