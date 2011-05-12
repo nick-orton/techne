@@ -25,11 +25,12 @@
     (tally [self item] 
       (get state item 0))
     (pluck-n [self item n]
-      (let [prev (tally self item)
-            n* (- prev n)]
-           (MapBag. (if (pos? n*)
-                        (assoc state item n*)
-                        (dissoc state item)))))
+      "remove n items from the bag. If there is a non-positive count in the map, remove the key"
+      (let [n* (- (tally self item) n)
+            state* (if (pos? n*)
+                       (assoc state item n*)
+                       (dissoc state item))]
+           (MapBag. state*)))
     (pluck [self item]
       (pluck-n self item 1))
     (inspect [self] state)
