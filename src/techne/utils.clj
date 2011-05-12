@@ -2,10 +2,17 @@
   "some generic helper functions"
   )
 
-
 (defmacro def-bang-form
   "takes a predicate as an argument and defines its inverse identified by a 
-   preceding '!'"
+   preceding '!'
+  
+   
+       user=> (def-bang-form =)
+       #'user/!=
+       user=> (!= 0 1)
+       true
+       user=> 
+  "
   [fun]
   `(defn  ~(symbol (str "!" fun)) 
      [& as#] 
