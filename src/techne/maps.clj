@@ -1,4 +1,4 @@
-(ns techne.map-utils
+(ns techne.maps
   "utilities for working with Associative data strutures"
 )
 

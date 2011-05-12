@@ -1,5 +1,5 @@
-(ns techne.map-utils-test
-  (:use [techne.map-utils] :reload-all)
+(ns techne.maps-test
+  (:use [techne.maps] :reload-all)
   (:use [clojure.test]
         [techne.utils]
         [techne.test-utils]))

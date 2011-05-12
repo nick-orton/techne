@@ -1,5 +1,5 @@
 (ns techne.bag
-  (:use [techne.map-utils]))
+  (:use [techne.maps]))
 
 (defprotocol Bag
   (put-n [self item n])

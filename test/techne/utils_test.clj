@@ -18,10 +18,3 @@
   (is (= [0 1 2] (insert-2nd 1 '(0 2))))
   (is (= [0 1 2 3 ] (insert-2nd 1 [0 2 3])))
   (is (= [0 1 2 3 ] (insert-2nd 1 [0 2 3]))))
-
-(deftest concat-strings
-  (is (= "abc" (+strs ["ab" "c"]))))
-
-(deftest test-swap-if-eq
-  (is (= "b" (swap-if-eq "a" "x" "b")))   
-  (is (= "x" (swap-if-eq "a" "x" "a"))))   
