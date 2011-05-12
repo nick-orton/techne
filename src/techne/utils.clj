@@ -1,6 +1,6 @@
 (ns techne.utils
   "some generic helper functions"
-  (:require [clojure.contrib.str-utils2 :as str]))
+  )
 
 
 (defmacro def-bang-form
@@ -23,7 +23,7 @@
   "concatinate a sequence of strings together"
   {:deprecated "0.6.1"}
   [strings]
-  (str/join "" strings))
+  (apply str strings))
 
 (defn swap-if
   {:deprecated "0.6.1"}
@@ -34,5 +34,4 @@
   {:deprecated "0.6.1"}
   [target token element]
   (swap-if #(= target %) token element))
-
 
