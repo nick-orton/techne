@@ -4,7 +4,7 @@
 
 (defn file->string 
   "Reads whole file into single string.
-   Newlines seperated by \n."
+   Newlines seperated by \\n."
   [file]
     (with-open [rdr (BufferedReader. (FileReader. file))]
       (str/join "\n" (line-seq rdr))))

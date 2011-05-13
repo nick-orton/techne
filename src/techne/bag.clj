@@ -1,5 +1,4 @@
-(ns techne.bag
-  )
+(ns techne.bag )
 
 (defprotocol Bag
   "A representation of a multi-set.  Bags can have duplicates, but are unordered.  
@@ -25,7 +24,7 @@
     [self item]))
 ;TODO tally with a predicate
 
-;  "Implements the bag interface using a HashMap.  A MapBag has constant time insert, removal, and tallying."
+; "Implements the bag interface using a HashMap.  A MapBag has constant time insert, removal, and tallying."
 (deftype MapBag 
   [state]
   Bag
@@ -51,7 +50,6 @@
     (total [self]
       (reduce #(+ %1 (tally self %2)) 0 (uniques self)))
     (->seq [self]
-           ;TODO
       (reduce #(concat (repeat (tally self %2) %2) %1) [] (uniques self)))
            
   Object
@@ -65,7 +63,7 @@
    (MapBag. state)))
 
 (defn seq->bag
+  "Construct a bag from a sequence"
   [sq]
   (put-all (create) sq))
-
 
