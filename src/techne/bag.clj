@@ -35,9 +35,9 @@
 ;TODO tally with a predicate
 
 (deftype MapBag 
-  "Implements the bag interface using a HashMap.  A MapBag has constant time insert, removal, and tallying."
   [state]
   Bag
+  "Implements the bag interface using a HashMap.  A MapBag has constant time insert, removal, and tallying."
     (put-n [self item n] 
       (let [n* (+ n (tally self item))]
         (MapBag. (assoc state item n*))))
@@ -48,7 +48,6 @@
     (tally [self item] 
       (get state item 0))
     (pluck-n [self item n]
-      "remove n items from the bag. If there is a non-positive count in the map, remove the key"
       (let [n* (- (tally self item) n)
             state* (if (pos? n*)
                        (assoc state item n*)
