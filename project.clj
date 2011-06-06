@@ -1,4 +1,4 @@
-(defproject techne "0.7.0-SNAPSHOT"
+(defproject techne "0.7.0"
   :description "a collection of utilities and macros"
   :url "https://github.com/nick-orton/techne"
   :dev-dependencies [[lein-clojars "0.6.0"]
