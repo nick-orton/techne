@@ -4,10 +4,10 @@
 
 ## Usage
 
-Leiningen
+###Leiningen
 To use techne in your own projects simply add the following to your project.clj file in the :dev-dependencies section:
 
-    [techne "0.6.1"]
+    [techne "0.7.0"]
 
 ## License
 The MIT License
