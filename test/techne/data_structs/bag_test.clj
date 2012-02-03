@@ -1,5 +1,5 @@
-(ns techne.bag-test
-  (:require [techne.bag :as bag])
+(ns techne.data-structs.bag-test
+  (:require [techne.data-structs.bag :as bag])
   (:use [clojure.test]
         [techne.test-utils])
   )

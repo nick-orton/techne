@@ -1,41 +1,41 @@
-(ns techne.bag )
+(ns techne.data-structs.bag )
 
 (defprotocol Bag
-  "A representation of a multi-set.  Bags can have duplicates, but are unordered.  
+  "A representation of a multi-set.  Bags can have duplicates, but are unordered.
    Use a Bag where you would normally use a map of sequences that are used to accumulate counts"
-  (put-n 
+  (put-n
     [self item n])
-  (put 
+  (put
     [self item])
-  (put-all 
+  (put-all
     [self items])
-  (pluck-n 
+  (pluck-n
     [self item n])
-  (pluck 
+  (pluck
     [self item])
-  (uniques 
+  (uniques
     [self])
   (inspect [self])  ;TODO pull up into an inspectable
-  (total 
+  (total
     [self])
-  (->seq 
+  (->seq
     [self])
-  (tally 
+  (tally
     [self item]))
 ;TODO tally with a predicate
 
 ; "Implements the bag interface using a HashMap.  A MapBag has constant time insert, removal, and tallying."
-(deftype MapBag 
+(deftype MapBag
   [state]
   Bag
-    (put-n [self item n] 
+    (put-n [self item n]
       (let [n* (+ n (tally self item))]
         (MapBag. (assoc state item n*))))
     (put [self item]
       (put-n self item 1))
     (put-all [self items]
       (reduce #(put %1 %2) self items))
-    (tally [self item] 
+    (tally [self item]
       (get state item 0))
     (pluck-n [self item n]
       (let [n* (- (tally self item) n)
@@ -46,20 +46,20 @@
     (pluck [self item]
       (pluck-n self item 1))
     (inspect [self] state)
-    (uniques [self] (set (keys state))) 
+    (uniques [self] (set (keys state)))
     (total [self]
       (reduce #(+ %1 (tally self %2)) 0 (uniques self)))
     (->seq [self]
       (reduce #(concat (repeat (tally self %2) %2) %1) [] (uniques self)))
-           
+
   Object
     (toString [self]
       (str "Bag: " (:state self))))
 
-(defn create 
-  ([] 
+(defn create
+  ([]
    (MapBag. {}))
-  ([state] 
+  ([state]
    (MapBag. state)))
 
 (defn seq->bag

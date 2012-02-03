@@ -1,6 +1,6 @@
 (ns techne.test-utils
  (:use [clojure.test])
- (:use [techne.bag :only [inspect]]))
+ (:use [techne.data-structs.bag :only [inspect]]))
 
 (defmacro isnt [thing]
   `(is (not ~thing)))
