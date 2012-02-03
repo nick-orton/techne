@@ -1,5 +1,5 @@
-(defproject techne "0.8.0-SNAPSHOT"
-  :description "a collection of utilities and macros"
+(defproject techne "1.0.0-SNAPSHOT"
+  :description "algo playground"
   :url "https://github.com/nick-orton/techne"
   :dev-dependencies [[lein-clojars "0.6.0"]
                      [marginalia "0.5.1"]]
