@@ -16,14 +16,20 @@
                  h
                  (recur (swap h parent-i i) parent-i))))))
 
+(defn- left-index [i]
+  (dec (* (inc i) 2)))
+
+(defn- violation [heap i child]
+  (and (< child (count heap)) (> (heap child) (heap i))))
+
 (defn delete [heap]
   (loop [h (pop (swap heap 0 (dec (count heap))))
          i 0]
-    (let [left-i (dec (* (inc i) 2))
+    (let [left-i (left-index i)
           right-i (inc left-i)]
-      (cond (and (< left-i (count h)) (> (h left-i) (h i)))
+      (cond (violation h i left-i)
               (recur (swap h left-i i) left-i)
-            (and (< right-i (count h)) (> (h right-i) (h i)))
+            (violation h i right-i)
               (recur (swap h right-i i) right-i)
             true
              h))))
