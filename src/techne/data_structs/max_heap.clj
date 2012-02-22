@@ -1,10 +1,5 @@
-(ns techne.data-structs.max-heap)
-
-
-(defn- swap [heap i1 i2]
-  (let [v1 (heap i1)
-        v2 (heap i2)]
-    (assoc (assoc heap i1 v2) i2 v1)))
+(ns techne.data-structs.max-heap
+  (:use [techne.vectors :only [swap]]))
 
 (defn insert [heap element]
   (loop [h (conj heap element)
