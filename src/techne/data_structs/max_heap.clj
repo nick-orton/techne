@@ -1,9 +1,6 @@
 (ns techne.data-structs.max-heap
-  (:use [techne.vectors :only [swap]]))
-
-; TODO pull up to binary-tree
-(defn parent-index [i]
-  (dec (bit-shift-right (inc i) 1)))
+  (:use [techne.vectors :only [swap]]
+        [techne.data-structs.binary-tree :only [parent-index left-index]]))
 
 (defn insert [heap element]
   (loop [h (conj heap element)
@@ -14,10 +11,6 @@
              (if (> (h parent-i) (h i))
                  h
                  (recur (swap h parent-i i) parent-i))))))
-
-; TODO pull up to binary-tree
-(defn- left-index [i]
-  (dec (* (inc i) 2)))
 
 (defn- violation? [heap i child]
   (and (< child (count heap)) (> (heap child) (heap i))))
