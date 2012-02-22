@@ -38,6 +38,5 @@
   (is (not (heap? [0 1])))
   (is (not (heap? [1 0 2])))
   (is (heap? [2 0 1]))
-  (is (not (heap? [3 2 1 1 1 0 2])))
-         )
+  (is (not (heap? [3 2 1 1 1 0 2]))))
 
