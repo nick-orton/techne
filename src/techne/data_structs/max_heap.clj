@@ -16,10 +16,11 @@
                  h
                  (recur (swap h parent-i i) parent-i))))))
 
+; TODO pull up to binary-tree
 (defn- left-index [i]
   (dec (* (inc i) 2)))
 
-(defn- violation [heap i child]
+(defn- violation? [heap i child]
   (and (< child (count heap)) (> (heap child) (heap i))))
 
 (defn delete [heap]
@@ -27,9 +28,9 @@
          i 0]
     (let [left-i (left-index i)
           right-i (inc left-i)]
-      (cond (violation h i left-i)
+      (cond (violation? h i left-i)
               (recur (swap h left-i i) left-i)
-            (violation h i right-i)
+            (violation? h i right-i)
               (recur (swap h right-i i) right-i)
             true
              h))))
@@ -43,4 +44,14 @@
 
 (defn find-max [heap]
   (first heap))
-;verify
+
+(defn heap? [vectr]
+  (loop [i 0]
+    (cond (= i (quot (count vectr) 2))
+            true
+          (violation? vectr i (left-index i))
+            false
+          (violation? vectr i (inc (left-index i)))
+            false
+          true
+            (recur (inc i)))))
