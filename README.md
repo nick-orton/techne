@@ -4,7 +4,7 @@
 
 ## License
 
-Released into the Public Domain, the same as πολιτεία
+Released into the Public Domain, the same as [πολιτεία](http://www.gutenberg.org/cache/epub/1497/pg1497.txt)
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
