@@ -1,0 +1,9 @@
+min-heap / heap
+binary-search-tree
+red-black-tree
+trie
+bubble-sort
+merge-sort
+8 queens
+trie
+mean of a matrix
