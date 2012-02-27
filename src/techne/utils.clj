@@ -1,6 +1,5 @@
 (ns techne.utils
-  "some generic helper functions"
-  )
+  "some generic helper functions")
 
 (defmacro def-bang-form
   "takes a predicate as an argument and defines its inverse identified by a
@@ -24,3 +23,8 @@
   "insert a value behind the head of a sequence"
   [x xs]
   (cons (first xs) (cons x (rest xs))))
+
+; TODO find if already exists in core.
+;        if not, test
+(defn always [c]
+  (fn [_] c))
