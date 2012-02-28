@@ -5,12 +5,12 @@
 
 (deftest test-locate
   (is (nil? (locate [] 0)))
-  (is (= 2 (locate [2] 2)))
+  (is (= 0 (locate [2] 2)))
   (is (= 1 (locate [2 1] 1)))
-  (is (= 3 (locate [2 1 3] 3)))
-  (is (= 2 (locate [3 1 4 nil 2] 2)))
+  (is (= 2 (locate [2 1 3] 3)))
+  (is (= 4 (locate [3 1 4 nil 2] 2)))
   (is (nil? (locate [3 1 4 nil nil nil 5] 2)))
-  (is (= 5 (locate [3 1 4 nil nil nil 5] 5))))
+  (is (= 6 (locate [3 1 4 nil nil nil 5] 5))))
 
 (deftest test-insert
   (is (= [1] (insert [] 1)))
@@ -21,3 +21,7 @@
   (is (= [2 1 3] (insert [2 1] 3))))
 
 ; TODO test delete
+
+(deftest test-delete
+  (is (= [] (delete [] 1)))
+  (is (= [nil] (delete [1] 1))))
