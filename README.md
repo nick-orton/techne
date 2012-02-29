@@ -1,5 +1,5 @@
 # τέχνη 
-  Core algorythms.  Sometimes it's good to go back and practice the 
+  Core algorithms.  Sometimes it's good to go back and practice the 
   fundamentals of your art.
 
 ## License
