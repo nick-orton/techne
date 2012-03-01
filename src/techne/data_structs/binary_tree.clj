@@ -1,6 +1,6 @@
-(ns techne.data-structs.binary-tree )
+; Functions for navigating a binary tree represented as a vector.
 
-; Methods for navigating a binary tree represented as a vector.
+(ns techne.data-structs.binary-tree )
 
 (defn parent-index [i]
   (dec (bit-shift-right (inc i) 1)))
@@ -12,7 +12,6 @@
 ; The right child is immediately after the left
 (defn right-index [i]
   (inc (left-index i)))
-
 
 ; The tree has a node if it is in the vector and not nil
 (defn- has-node [tree index]
