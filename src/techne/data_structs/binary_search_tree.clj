@@ -46,7 +46,6 @@
         (has-left-child t i)
           (recur (assoc t i (t (left-index i))) (left-index i))
         (has-right-child t i)
-          (let [right-i (right-index i)]
-            (recur (assoc t i (t right-i)) right-i))
+            (recur (assoc t i (t (right-index i))) (right-index i))
         true ; has no children
           (assoc t i nil)))))
