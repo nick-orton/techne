@@ -2,35 +2,32 @@
 
 ; Methods for navigating a binary tree represented as a vector.
 
-; TODO test
 (defn parent-index [i]
   (dec (bit-shift-right (inc i) 1)))
 
-; TODO test
+; The left child has a one-based index twice the parent's.
 (defn left-index [i]
   (dec (* (inc i) 2)))
 
-; TODO test
+; The right child is immediately after the left
 (defn right-index [i]
   (inc (left-index i)))
 
-; TODO test
-; The left child has a one-based index twice the parent's.
+
+; The tree has a node if it is in the vector and not nil
+(defn- has-node [tree index]
+  (and (> (count tree) index )
+       (not (nil? (tree index )))))
+
 (defn has-left-child [tree i]
-  (and (> (count tree) (left-index i) )
-       (not (nil? (tree (left-index i))))))
+  (has-node tree (left-index i)))
 
-; TODO test
 (defn has-right-child [tree i]
-  (let [right (inc (left-index i))]
-    (and (> (count tree) right )
-         (not (nil? (tree right))))))
+  (has-node tree (right-index i)))
 
-; TODO test
+; Navigate down the left child branch as far as possible
 (defn leftmost-child [tree index]
   (loop [i index]
     (if (has-left-child tree i)
         (recur (left-index i))
         i)))
-
-
