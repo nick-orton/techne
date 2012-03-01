@@ -11,6 +11,10 @@
   (dec (* (inc i) 2)))
 
 ; TODO test
+(defn right-index [i]
+  (inc (left-index i)))
+
+; TODO test
 ; The left child has a one-based index twice the parent's.
 (defn has-left-child [tree i]
   (and (> (count tree) (left-index i) )
