@@ -12,3 +12,14 @@
 
 (defn vrest [vectr]
   (vec (rest vectr)))
+
+;TODO test
+(defn clean-right [vectr]
+  (loop [v vectr]
+    (cond
+      (empty? v)
+        v
+      (nil? (last v))
+        (recur (vec (butlast v)))
+      true
+        v)))

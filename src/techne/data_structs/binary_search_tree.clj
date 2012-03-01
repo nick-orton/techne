@@ -28,33 +28,25 @@
       true
         (recur (inc (left-index i))))))
 
-(defn has-left-child [tree i]
-  (and (> (count tree) (left-index i) )
-       (not (nil? (tree (left-index i))))))
-
-(defn has-right-child [tree i]
-  (let [right (inc (left-index i))]
-    (and (> (count tree) right )
-         (not (nil? (tree right))))))
+; the in-order-successor of a node in the tree is the leftmost child
+; of the right subtree
+(defn- in-order-successor [tree i]
+  (leftmost-child tree (inc (left-index i))))
 
 (defn delete [tree elem]
-  (let [i (locate tree elem)]
-    (cond
-      (nil? i)
-        tree
-      (and (has-left-child tree i) (has-right-child tree i))
-        nil ; TODO see below
-      (has-left-child tree i)
-        nil ; TODO delete i replace i with left
-      (has-right-child tree i)
-        nil ; TODO delete i replace i with right
-      true ; has no children
-        (assoc tree i nil))))
-
-; Call the node to be deleted N. Do not delete N. Instead, choose either its
-; in-order successor node or its in-order predecessor node, R. Replace the
-; value of N with the value of R, then delete R.
-; As with all binary trees, a node's in-order successor is the left-most child
-; of its right subtree
-
-
+  (clean-right
+    (loop [t tree
+           i (locate tree elem) ]
+      (cond
+        (nil? i)
+          tree
+        (and (has-left-child t i) (has-right-child t i))
+          (let [suc (in-order-successor t i)]
+            (recur (assoc t i (t suc)) suc))
+        (has-left-child t i)
+          (recur (assoc t i (t (left-index i))) (left-index i))
+        (has-right-child t i)
+          (let [right-i (inc (left-index i))]
+            (recur (assoc t i (t right-i)) right-i))
+        true ; has no children
+          (assoc t i nil)))))
