@@ -1,10 +1,30 @@
+data-structs
+------------
 min-heap / heap
-binary-search-tree
-red-black-tree
+red-black tree
 trie
+zipper
+bloom filter
+avl tree
+interval tree
+b-tree
+
+algos
+-----
+bucket sort
 bubble-sort
 merge-sort
-8 queens
-trie
+quicksort
+radix sort
+
+problems
+--------
 mean of a matrix
-zipper
+matching parens
+maximum subarray problem (68)
+matrix multiplication
+hiring problem (114)
+rod-cutting problem (360)
+matrix-chain multiplication (370)
+longest-common subsequence (390)
+huffman code (428)
