@@ -3,7 +3,7 @@
 ; as a vector where each index represents a column and its value represents
 ; the row that the queen is placed on.
 ;
-(ns techne.eight-queens)
+(ns techne.probs.eight-queens)
 
 ; A queen can be in violation in 1 of 3 ways
 ; 1. on the same column as another queen (impossible in our solution)
