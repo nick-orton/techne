@@ -23,3 +23,11 @@
         (recur (vec (butlast v)))
       true
         v)))
+
+; TODO test
+(defn vtake [n vectr]
+  (vec (take n vectr)))
+
+; TODO test
+(defn vdrop [n vectr]
+  (vec (drop n vectr)))
