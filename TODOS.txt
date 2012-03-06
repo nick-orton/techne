@@ -13,13 +13,12 @@ algos
 -----
 bucket sort
 bubble-sort
-merge-sort
-quicksort
 radix sort
 
 problems
 --------
-mean of a matrix
+fizzbuzz
+mean of a sorted matrix
 matching parens
 maximum subarray problem (68)
 matrix multiplication
