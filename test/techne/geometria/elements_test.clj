@@ -25,4 +25,5 @@
   (is (= p1 (left-point seg)))
   (is (= p2 (right-point seg)))
   (is (= p1 (low-point seg)))
+  (is (= 3/2 (x-cord (mid-point seg))))
   (is (= p2 (high-point seg))))

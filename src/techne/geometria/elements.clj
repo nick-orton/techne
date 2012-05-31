@@ -17,6 +17,7 @@
   (low-point     [ls])
   (left-point    [ls])
   (right-point   [ls])
+  (mid-point     [ls])
   (length        [ls]))
 
 (defn point [x y]
@@ -58,12 +59,20 @@
       (high-point [segment]
         (point-that-is max y-cord segment))
 
-      (low-point [segment] nil
+      (low-point [segment]
         (point-that-is min y-cord segment))
 
-      (left-point [segment] nil
+      (left-point [segment]
         (point-that-is min x-cord segment))
 
-      (right-point [segment] nil
+      (right-point [segment]
         (point-that-is max x-cord segment))
-      )))
+
+      (mid-point [seg]
+        (let [x (+ (x-cord (left-point seg))
+                   (/ (- (x-cord (right-point seg))
+                         (x-cord (left-point  seg))) 2))
+              y (+ (y-cord (low-point seg))
+                   (/ (- (y-cord (high-point seg))
+                         (y-cord (low-point  seg))) 2))]
+         (point x y))))))

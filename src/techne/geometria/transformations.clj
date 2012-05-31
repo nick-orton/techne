@@ -7,3 +7,6 @@
              (- (slope line1) (slope line2)))
         y (+ (* (slope line1) x) (offset line1))]
        (point x y) ))
+
+(defn perpendicular-slope [slope]
+  (* -1 (/ 1 slope)))
