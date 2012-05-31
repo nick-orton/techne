@@ -15,3 +15,6 @@
     (is (= 3  (slope line)))
     (is (= -1 (offset line)))))
 
+(deftest test-length
+  (let [seg345 (line-segment (point 0 3) (point 4 0))]
+    (is (= 5 (length seg345)))))
