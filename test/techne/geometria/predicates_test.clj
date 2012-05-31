@@ -10,4 +10,6 @@
     (is (point-on-line? point-on line))
     (is (not (point-on-line? point-off line)))))
 
-;TODO point-on-line-segment?
+;TODO point-on-line-segment? point line-segment
+;TODO point-in-circle? point circle
+;TODO intersect? line-segment line-segment
