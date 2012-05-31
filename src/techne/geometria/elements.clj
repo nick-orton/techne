@@ -34,6 +34,9 @@
   (let [d (apply ord-fn (map dimension-fn (points segment)))]
     (first (filter #(= (dimension-fn %) d) (points segment)))))
 
+(defn line-through-point [slope point]
+  (line slope (- (y-cord point) (* slope (x-cord point)))))
+
 
 (defn line-segment [point1 point2]
   (let [rise (- (y-cord point1) (y-cord point2))
@@ -47,11 +50,7 @@
         #{point1 point2})
 
       (segment->line [seg]
-        (let [m (line-slope seg)
-              y (y-cord point1)
-              x (x-cord point1)
-              c (- y (* m x))]
-          (line m c)))
+       (line-through-point (line-slope seg) point1))
 
       (length [_]
         (java.lang.Math/sqrt (+ (* rise rise) (* run run))))
