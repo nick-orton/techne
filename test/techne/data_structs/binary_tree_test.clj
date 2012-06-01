@@ -29,6 +29,8 @@
   (is (has? t 7))
   (is (has? t 6))
   (is (has? t 8))
-  (is (not (has? t 1)))
+  (is (not (has? t 1))))
 
-         )
+(deftest test-delete
+  (is (= 6 (root (delete t 5))))
+  (is (not (has? (delete t 5) 5))))
