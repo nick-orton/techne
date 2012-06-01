@@ -1,6 +1,6 @@
 ; Functions for navigating a binary tree represented as a vector.
 
-(ns techne.data-structs.binary-tree )
+(ns techne.data-structs.vector-binary-tree )
 
 (defn parent-index [i]
   (dec (bit-shift-right (inc i) 1)))

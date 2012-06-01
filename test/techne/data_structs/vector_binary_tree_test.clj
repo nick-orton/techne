@@ -1,6 +1,6 @@
-(ns techne.data-structs.binary-tree-test
+(ns techne.data-structs.vector-binary-tree-test
   (:use [clojure.test]
-        [techne.data-structs.binary-tree]))
+        [techne.data-structs.vector-binary-tree]))
 
 (deftest test-parent-index
   (is (= 0 (parent-index 1)))

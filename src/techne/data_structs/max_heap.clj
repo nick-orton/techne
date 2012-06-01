@@ -3,7 +3,7 @@
 
 (ns techne.data-structs.max-heap
   (:use [techne.vectors :only [swap]]
-        [techne.data-structs.binary-tree :only [parent-index left-index right-index]]))
+        [techne.data-structs.vector-binary-tree :only [parent-index left-index right-index]]))
 
 ; insert the new value at the bottom of the heap.  Bubble it up until the heap is valid
 (defn insert [heap element]

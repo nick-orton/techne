@@ -6,7 +6,7 @@
 ; accepts Ints as values.
 
 (ns techne.data-structs.binary-search-tree
-  (:use [techne.data-structs.binary-tree]
+  (:use [techne.data-structs.vector-binary-tree]
         [techne.vectors]
         [techne.utils :only [always]]))
 
