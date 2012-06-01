@@ -19,6 +19,16 @@
   (is (= 4 (root (right (left t)))))
   (is (= 7 (root (right t))))
   (is (= 6 (root (left (right t)))))
-  (is (= 8 (root (right (right t)))))
+  (is (= 8 (root (right (right t))))))
+
+(deftest test-has
+  (is (has? t 5))
+  (is (has? t 3))
+  (is (has? t 2))
+  (is (has? t 4))
+  (is (has? t 7))
+  (is (has? t 6))
+  (is (has? t 8))
+  (is (not (has? t 1)))
 
          )

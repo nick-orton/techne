@@ -30,11 +30,11 @@
       (cond
         (= k node)
           true
-        (< k node)
+        (> k node)
           (if (nil? right)
             false
             (has? right k))
-        (> k node)
+        (< k node)
           (if (nil? left)
             false
             (has? left k))))
