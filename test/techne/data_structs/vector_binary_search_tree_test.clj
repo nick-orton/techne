@@ -1,6 +1,6 @@
-(ns techne.data-structs.binary-search-tree-test
+(ns techne.data-structs.vector-binary-search-tree-test
   (:use [clojure.test]
-        [techne.data-structs.binary-search-tree]))
+        [techne.data-structs.vector-binary-search-tree]))
 
 (deftest test-locate
   (is (nil? (locate [] 0)))

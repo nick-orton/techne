@@ -5,7 +5,7 @@
 ; parent, and the left child is smaller.  This implementation of a BST only
 ; accepts Ints as values.
 
-(ns techne.data-structs.binary-search-tree
+(ns techne.data-structs.vector-binary-search-tree
   (:use [techne.data-structs.vector-binary-tree]
         [techne.vectors]
         [techne.utils :only [always]]))
