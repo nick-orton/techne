@@ -56,6 +56,27 @@
           (graph vertices-list*))))
 
     (remove-vertex [_ vertex]
-      (graph (remove (matches?-fn vertex) vertices-list)))
+      (let [self (graph (remove (matches?-fn vertex) vertices-list))]
+        (loop [old-list (as-list self)
+               vertices-list* '()]
+          (if (empty? old-list)
+            (graph vertices-list*)
+            (let [to-purge (first old-list)]
+              (recur
+                (rest old-list)
+                (cons (struct Vertex (:name to-purge)
+                                     (remove #(= vertex %) (:tos to-purge))
+                                     (remove #(= vertex %) (:froms to-purge))) vertices-list*)))))))
+
+    (topological-sort [self]
+      (loop [self self
+             sorted '()]
+        (if (empty? (as-list self))
+          (reverse sorted)
+          (let [v-list (as-list self)
+                least-froms-amt (apply min (map #(count (:froms %)) v-list))
+                least-froms (first (filter #(= least-froms-amt (count (:froms %))) v-list))
+                least-name (:name least-froms)]
+            (recur (remove-vertex self least-name) (cons least-name sorted))))))
   ))
 
