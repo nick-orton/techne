@@ -7,6 +7,7 @@
   (froms            [graph vertex])
   (as-list          [graph])
   (insert-vertex    [graph vertex])
+  (remove-vertex    [graph vertex])
   (insert-edge      [graph vertex vertex])
   (topological-sort [graph])
   (shortest-path    [graph vertex vertex]))
@@ -53,5 +54,8 @@
               to* (struct Vertex to-name (:tos to) (conj (:froms to) from-name))
               vertices-list* (conj (remove #(or (= to %) (= from %)) (as-list self)) from* to* )]
           (graph vertices-list*))))
+
+    (remove-vertex [_ vertex]
+      (graph (remove (matches?-fn vertex) vertices-list)))
   ))
 
