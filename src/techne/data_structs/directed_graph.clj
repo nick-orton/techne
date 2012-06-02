@@ -4,6 +4,8 @@
 (defprotocol Graph
   (has-vertex?      [graph vertex])
   (tos              [graph vertex])
+  (froms            [graph vertex])
+  (as-list          [graph])
   (insert-vertex    [graph vertex])
   (insert-edge      [graph vertex vertex])
   (topological-sort [graph])
@@ -33,6 +35,10 @@
     (tos [_ vertex]
       (:tos (get-vertex vertices-list vertex)))
 
+    (froms [_ vertex]
+      (:froms (get-vertex vertices-list vertex)))
+
+    (as-list [_] vertices-list)
 
     (insert-vertex [g vertex]
       (if (not (has-vertex? g vertex))
@@ -41,11 +47,11 @@
     (insert-edge [self from-name to-name]
       (let [self (add-if-missing self from-name)
             self (add-if-missing self to-name)]
-        (let [from (get-vertex vertices-list from-name)
+        (let [from (get-vertex (as-list self) from-name)
               from* (struct Vertex from-name (conj (:tos from) to-name) (:froms from))
-              to (get-vertex vertices-list to-name)
+              to (get-vertex (as-list self) to-name)
               to* (struct Vertex to-name (:tos to) (conj (:froms to) from-name))
-              vertices-list* (conj (remove #(or (= to %) (= from %)) vertices-list) from* to* )]
+              vertices-list* (conj (remove #(or (= to %) (= from %)) (as-list self)) from* to* )]
           (graph vertices-list*))))
   ))
 
