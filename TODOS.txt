@@ -19,7 +19,6 @@ problems
 --------
 fizzbuzz
 mean of a sorted matrix
-matching parens
 maximum subarray problem (68)
 matrix multiplication
 hiring problem (114)
