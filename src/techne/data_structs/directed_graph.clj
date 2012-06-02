@@ -38,12 +38,14 @@
       (if (not (has-vertex? g vertex))
         (graph (cons (struct Vertex vertex #{} #{}) vertices-list))))
 
-    (insert-edge [self from to]
-      (let [self (add-if-missing self from)
-            self (add-if-missing self to)]
-        (let [v (get-vertex vertices-list from)
-              v* (struct Vertex (:name v) (conj (:tos v) to))
-              vertices-list* (cons v* (remove #(= v %) vertices-list))]
+    (insert-edge [self from-name to-name]
+      (let [self (add-if-missing self from-name)
+            self (add-if-missing self to-name)]
+        (let [from (get-vertex vertices-list from-name)
+              from* (struct Vertex from-name (conj (:tos from) to-name) (:froms from))
+              to (get-vertex vertices-list to-name)
+              to* (struct Vertex to-name (:tos to) (conj (:froms to) from-name))
+              vertices-list* (conj (remove #(or (= to %) (= from %)) vertices-list) from* to* )]
           (graph vertices-list*))))
   ))
 
