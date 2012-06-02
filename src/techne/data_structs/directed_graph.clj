@@ -3,7 +3,7 @@
 
 (defprotocol Graph
   (has-vertex?      [graph vertex])
-  (adjacents        [graph vertex])
+  (tos              [graph vertex])
   (insert-vertex    [graph vertex])
   (insert-edge      [graph vertex vertex])
   (topological-sort [graph])
@@ -18,6 +18,11 @@
 
 (defstruct Vertex :name :tos :froms)
 
+(defn- add-if-missing [graph vertex]
+  (if (not (has-vertex? graph vertex))
+    (insert-vertex graph vertex)
+    graph))
+
 ; vertices-list takes the form '( '(vertex-name #{adjacent-vertexes}))
 (defn graph [vertices-list]
   (reify Graph
@@ -25,17 +30,20 @@
     (has-vertex? [_ vertex]
       (some (matches?-fn vertex) vertices-list))
 
-    (adjacents [_ vertex]
+    (tos [_ vertex]
       (:tos (get-vertex vertices-list vertex)))
+
 
     (insert-vertex [g vertex]
       (if (not (has-vertex? g vertex))
         (graph (cons (struct Vertex vertex #{} #{}) vertices-list))))
 
-    (insert-edge [_ vertex vertex2]
-      (let [v (get-vertex vertices-list vertex)
-            v* (struct Vertex (:name v) (conj (:tos v) vertex2))
-            vertices-list* (cons v* (remove #(= v %) vertices-list))]
-        (graph vertices-list*)))
+    (insert-edge [self from to]
+      (let [self (add-if-missing self from)
+            self (add-if-missing self to)]
+        (let [v (get-vertex vertices-list from)
+              v* (struct Vertex (:name v) (conj (:tos v) to))
+              vertices-list* (cons v* (remove #(= v %) vertices-list))]
+          (graph vertices-list*))))
   ))
 

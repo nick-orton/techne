@@ -13,5 +13,5 @@
     (is (has-vertex? (insert-vertex g :a) :a))))
 
 (deftest test-insert-edge
-  (is (:z (adjacents (insert-edge simple-graph :a :z) :a))))
+  (is (:z (tos (insert-edge simple-graph :a :z) :a))))
 
