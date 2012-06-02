@@ -2,9 +2,10 @@
   (:use [clojure.test]
         [techne.data-structs.directed-graph]))
 
+(def simple-graph (graph (list (struct Vertex :a #{} #{}))))
 
 (deftest test-has-vertex
-  (is (has-vertex? (graph (list (list :a []))) :a ))
+  (is (has-vertex? simple-graph :a ))
   (is (not (has-vertex? (graph (list (list :v []))) :a ))))
 
 (deftest test-insert-vertex
@@ -12,5 +13,5 @@
     (is (has-vertex? (insert-vertex g :a) :a))))
 
 (deftest test-insert-edge
-  (is (:z (adjacents (insert-edge (graph (list (list :a #{}))) :a :z) :a))))
+  (is (:z (adjacents (insert-edge simple-graph :a :z) :a))))
 

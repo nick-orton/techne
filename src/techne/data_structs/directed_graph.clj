@@ -10,10 +10,13 @@
   (shortest-path    [graph vertex vertex]))
 
 (defn matches?-fn [name]
-  (fn [vertex] (= name (first vertex))))
+  (fn [vertex] (= name (:name vertex))))
 
 (defn- get-vertex [vertices-list vertex]
   (first (filter (matches?-fn vertex) vertices-list)))
+
+
+(defstruct Vertex :name :tos :froms)
 
 ; vertices-list takes the form '( '(vertex-name #{adjacent-vertexes}))
 (defn graph [vertices-list]
@@ -23,15 +26,15 @@
       (some (matches?-fn vertex) vertices-list))
 
     (adjacents [_ vertex]
-      (second (get-vertex vertices-list vertex)))
+      (:tos (get-vertex vertices-list vertex)))
 
     (insert-vertex [g vertex]
       (if (not (has-vertex? g vertex))
-        (graph (cons (list vertex #{}) vertices-list))))
+        (graph (cons (struct Vertex vertex #{} #{}) vertices-list))))
 
     (insert-edge [_ vertex vertex2]
       (let [v (get-vertex vertices-list vertex)
-            v* (list (first v) (conj (second v) vertex2))
+            v* (struct Vertex (:name v) (conj (:tos v) vertex2))
             vertices-list* (cons v* (remove #(= v %) vertices-list))]
         (graph vertices-list*)))
   ))
