@@ -10,3 +10,15 @@
              (first prices)
              (conj changes (- (first prices) last-price ))))))
 
+(defn kadane [vectr]
+  (loop [vectr vectr
+         max-ending-here 0
+         max-so-far 0 ]
+    (if (empty? vectr)
+      max-so-far
+      (let [current (first vectr)]
+        (recur (rest vectr)
+               (max current max-ending-here current)
+               (max max-so-far max-ending-here))))))
+
+
