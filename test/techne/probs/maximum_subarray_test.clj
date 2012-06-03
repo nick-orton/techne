@@ -9,4 +9,4 @@
          [100 113 110 85 105 102 86 63 81 101 94 106 101 79 94 90 97]))))
 
 (deftest test-maximum-subarray
-    (is (= 20 (kadane prices))))
+    (is (= [20 3 4] (kadane prices))))

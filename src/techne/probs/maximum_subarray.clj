@@ -12,13 +12,22 @@
 
 (defn kadane [vectr]
   (loop [vectr vectr
+         index -1
          max-ending-here 0
-         max-so-far 0 ]
+         max-so-far 0
+         start (first vectr)
+         end   (first vectr)]
     (if (empty? vectr)
-      max-so-far
-      (let [current (first vectr)]
+      [max-so-far start end]
+      (let [current (first vectr)
+            max-ending-here* (max current max-ending-here current)
+            max-so-far*      (max max-so-far max-ending-here)]
         (recur (rest vectr)
-               (max current max-ending-here current)
-               (max max-so-far max-ending-here))))))
+               (inc index)
+               max-ending-here*
+               max-so-far*
+               (if (not (= max-ending-here* max-ending-here)) index start)
+               (if (not (= max-so-far* max-so-far)) index end)
+               )))))
 
 
