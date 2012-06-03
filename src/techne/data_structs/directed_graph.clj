@@ -81,19 +81,30 @@
 
     (shortest-path [self from to]
 
-       (loop [stack (seq (tos self from))
-              distances (reduce #(assoc %1 %2 1) {} stack) ]
-           (if (empty? stack)
-             (get distances to)
-             (let [top (first stack)
-                   distance (get distances top)
-                   nexts (tos self top)
-                   to-stack (filter
-                              #(< distance (get distances % (inc distance)))
-                              nexts)
-                   distances* (reduce #(assoc %1 %2 (inc distance))
-                                      distances to-stack)]
-               (recur (concat (rest stack) to-stack) distances*)))))
-
+       (let [dists (loop [stack (seq (tos self from))
+                          distances (reduce #(assoc %1 %2 1) {} stack) ]
+                     (if (empty? stack)
+                       distances
+                       (let [top (first stack)
+                             distance (get distances top)
+                             nexts (tos self top)
+                             to-stack (filter
+                                        #(< distance (get distances
+                                                          % (inc distance)))
+                                        nexts)
+                             distances* (reduce #(assoc %1 %2 (inc distance))
+                                                distances to-stack)]
+                         (recur (concat (rest stack) to-stack) distances*))))]
+         (loop [path (list to)]
+           (let [top (first path)
+                 candidates (froms self top)
+                 top-distance (get dists top)
+                 least-distance (apply min (map #(get dists % top-distance)
+                                                candidates))
+                 least-froms (first (filter #(= least-distance
+                                                (get dists % top-distance))
+                                            candidates))]
+             (if (= least-froms from)
+               (cons least-froms path)
+               (recur (cons least-froms path)))))))
     ))
-

@@ -34,6 +34,6 @@
   (is (= (list :a :b :c) (topological-sort vert3g))))
 
 (deftest shortest-path-test
-  ;(is (= 1 (shortest-path vert3g :a :c)))
-  (is (= 2 (shortest-path vert3g* :a :c))))
+  (is (= '(:a :c) (shortest-path vert3g :a :c)))
+  (is (= '(:a :b :c) (shortest-path vert3g* :a :c))))
 
