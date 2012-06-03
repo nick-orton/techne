@@ -78,5 +78,22 @@
                 least-froms (first (filter #(= least-froms-amt (count (:froms %))) v-list))
                 least-name (:name least-froms)]
             (recur (remove-vertex self least-name) (cons least-name sorted))))))
-  ))
+
+    (shortest-path [self from to]
+
+       (loop [stack (seq (tos self from))
+              distances (reduce #(assoc %1 %2 1) {} stack) ]
+           (if (empty? stack)
+             (get distances to)
+             (let [top (first stack)
+                   distance (get distances top)
+                   nexts (tos self top)
+                   to-stack (filter
+                              #(< distance (get distances % (inc distance)))
+                              nexts)
+                   distances* (reduce #(assoc %1 %2 (inc distance))
+                                      distances to-stack)]
+               (recur (concat (rest stack) to-stack) distances*)))))
+
+    ))
 

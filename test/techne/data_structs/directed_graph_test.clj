@@ -6,6 +6,10 @@
 (def vert3g (graph (list (struct Vertex :a #{:b :c} #{})
                          (struct Vertex :b #{:c} #{:a})
                          (struct Vertex :c #{} #{:a :b}))))
+(def vert3g* (graph (list (struct Vertex :a #{:b } #{})
+                          (struct Vertex :b #{:c} #{:a})
+                          (struct Vertex :c #{} #{:b}))))
+
 
 (deftest test-has-vertex
   (is (has-vertex? simple-graph :a ))
@@ -29,4 +33,7 @@
 (deftest test-topological-sort
   (is (= (list :a :b :c) (topological-sort vert3g))))
 
+(deftest shortest-path-test
+  ;(is (= 1 (shortest-path vert3g :a :c)))
+  (is (= 2 (shortest-path vert3g* :a :c))))
 
