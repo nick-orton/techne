@@ -9,6 +9,11 @@
 (def vert3g* (graph (list (struct Vertex :a #{:b } #{})
                           (struct Vertex :b #{:c} #{:a})
                           (struct Vertex :c #{} #{:b}))))
+(def vert4g (graph (list (struct Vertex :a #{:b } #{})
+                         (struct Vertex :d #{:c} #{})
+                         (struct Vertex :b #{:c} #{:a})
+                         (struct Vertex :c #{} #{:b :d}))))
+
 
 
 (deftest test-has-vertex
@@ -35,5 +40,6 @@
 
 (deftest shortest-path-test
   (is (= '(:a :c) (shortest-path vert3g :a :c)))
-  (is (= '(:a :b :c) (shortest-path vert3g* :a :c))))
+  (is (= '(:a :b :c) (shortest-path vert3g* :a :c)))
+  (is (= '(:a :b :c) (shortest-path vert4g :a :c))))
 
