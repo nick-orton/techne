@@ -19,7 +19,6 @@ problems
 --------
 fizzbuzz
 mean of a sorted matrix
-maximum subarray problem (68)
 matrix multiplication
 matrix-chain multiplication (370)
 longest-common subsequence (390)
