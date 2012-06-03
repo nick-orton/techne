@@ -28,3 +28,20 @@
         (.add queue n)
         (recur queue)))))
 
+(defn- is-leaf [stack-node]
+  (nil? (:left (first stack-node))))
+
+(defn build-code-map [code-tree]
+  (loop [stack (list [(:left code-tree) "0"] [(:right code-tree) "1"])
+         code-map {}]
+    (if (empty? stack)
+      code-map
+      (let [top (first stack)]
+        (if (is-leaf top)
+            (recur (rest stack) (assoc code-map (:value (first top)) (second top)))
+            (recur
+              (conj (rest stack) [(:left  (first top)) (str (second top) "0")]
+                                 [(:right (first top)) (str (second top) "1")])
+              code-map))))))
+
+
