@@ -1,77 +1,85 @@
 (ns techne.data-structs.binary-tree)
 
+(defprotocol Node
+  (left      [node])
+  (right     [node])
+  (successor [node]))
 
 (defprotocol Tree
-  (root   [tree])
-  (left   [tree])
-  (right  [tree])
-  (insert [tree key])
-  (delete [tree key])
-  (has?   [tree key]))
+  (root    [tree])
+  (insert  [tree key])
+  (delete  [tree key])
+  (minimum [tree])
+  (has?    [tree key]))
 
 (declare tree)
 
 (defn leaf [val]
   (tree val nil nil))
 
-(defn- leftmost [node]
-  (if (nil? (left node))
-    node
-    (leftmost (left node))))
 
+(defn tree [node left-node right-node]
+  (reify
+    Node
+    (left [_] left-node)
+    (right [_] right-node)
+    (successor [_]
+      (minimum right-node))
 
-(defn tree [node left right]
-  (reify Tree
+    Tree
     (root [_] node)
-    (left [_] left)
-    (right [_] right)
+
+    (minimum [node]
+      (if (nil? (left node))
+        node
+        (minimum (left node))))
 
     (has? [_ k]
       (cond
         (= k node)
           true
         (> k node)
-          (if (nil? right)
+          (if (nil? right-node)
             false
-            (has? right k))
+            (has? right-node k))
         (< k node)
-          (if (nil? left)
+          (if (nil? left-node)
             false
-            (has? left k))))
+            (has? left-node k))))
 
      (insert [self k]
        (cond
          (= k node)
            node ;do nothing
          (> k node)
-           (if (nil? right)
-             (tree node left (leaf k ))
-             (tree node left (insert right k)))
+           (if (nil? right-node)
+             (tree node left-node (leaf k ))
+             (tree node left-node (insert right-node k)))
          (< k node)
-           (if (nil? left)
-             (tree node (leaf k ) right)
-             (tree node (insert left k) right))))
+           (if (nil? left-node)
+             (tree node (leaf k ) right-node)
+             (tree node (insert left-node k) right-node))))
 
     (delete [self k]
       (cond
         (= k node)
           (cond
-            (and right left)
-              (let [replacement (leftmost right)]
+            (and right-node left-node)
+              (let [replacement (successor self)]
                 (tree (root replacement)
-                      left
-                      (delete right (root replacement))))
-            right
-              right
-            left
-              left
+                      left-node
+                      (delete right-node (root replacement))))
+            right-node
+              right-node
+            left-node
+              left-node
             true
               nil)
         (< k node)
-          (if (nil? left)
+          (if (nil? left-node)
             node ;value to delete not found
-            (tree node (delete left k) right))
+            (tree node (delete left-node k) right-node))
         (> k node)
-          (if (nil? right)
+          (if (nil? right-node)
             node ;value to delete not found
-            (tree node left (delete right k)))))))
+            (tree node left-node (delete right-node k)))))))

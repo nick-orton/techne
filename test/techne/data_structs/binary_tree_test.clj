@@ -31,6 +31,11 @@
   (is (has? t 8))
   (is (not (has? t 1))))
 
+(deftest test-minimum
+  (is (= 2 (root (minimum t)))))
+
 (deftest test-delete
   (is (= 6 (root (delete t 5))))
   (is (not (has? (delete t 5) 5))))
+
+
