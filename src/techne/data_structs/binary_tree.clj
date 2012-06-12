@@ -6,11 +6,12 @@
   (successor [node]))
 
 (defprotocol Tree
-  (root    [tree])
-  (insert  [tree key])
-  (delete  [tree key])
-  (minimum [tree])
-  (has?    [tree key]))
+  (root          [tree])
+  (in-order-walk [tree])
+  (insert        [tree key])
+  (delete        [tree key])
+  (minimum       [tree])
+  (has?          [tree key]))
 
 (declare tree)
 
@@ -29,10 +30,16 @@
     Tree
     (root [_] node)
 
-    (minimum [node]
-      (if (nil? (left node))
-        node
-        (minimum (left node))))
+    (in-order-walk [_]
+      (concat (if left-node (in-order-walk left-node))
+              [node]
+              (if right-node (in-order-walk right-node))))
+
+
+    (minimum [tree]
+      (if (nil? (left tree))
+        tree
+        (minimum (left tree))))
 
     (has? [_ k]
       (cond

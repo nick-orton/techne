@@ -38,4 +38,6 @@
   (is (= 6 (root (delete t 5))))
   (is (not (has? (delete t 5) 5))))
 
+(deftest test-inorder-walk
+  (is (= [2 3 4 5 6 7 8] (in-order-walk t))))
 
